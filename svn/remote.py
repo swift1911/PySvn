@@ -21,3 +21,8 @@ class RemoteClient(svn.common.CommonClient):
 
     def __repr__(self):
         return ('<SVN(REMOTE) %s>' % (self.url))
+    def forcecopy(self,path1,path2):
+        cmd=['-m','"remove"',path2]
+        self.run_command('delete',cmd)
+        cmd=[path1,path2,'-m','copy']
+        self.run_command('copy',cmd)
